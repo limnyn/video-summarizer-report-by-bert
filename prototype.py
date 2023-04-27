@@ -12,11 +12,7 @@
 # 	6 결과물 result.txt로 저장
 
 
-<<<<<<< HEAD
 
-=======
-API_KEY = "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"
->>>>>>> adbf1ad6e2c6ea3ce39ecde989270e120e369a8d
 
 
 import time, os, re, shutil
@@ -62,11 +58,8 @@ text = re.sub(r"\n+", " ", text)
 text = re.sub(r"([^\n.!?]*(?:[.!?](?![']?\s|$)[^\n.!?]*)*[.!?]['\"]?(?=\s|$))", r"\1\n", text)
 # 문장 시작 부분의 이상한 띄어쓰기를 제거합니다.
 text = re.sub(r"\n\s+", r"\n", text)
-<<<<<<< HEAD
 # 결과물에서 "[Music]" 단어를 삭제합니다.
 text = re.sub(r"\[Music\]", "", text)
-=======
->>>>>>> adbf1ad6e2c6ea3ce39ecde989270e120e369a8d
 
 # 출력 파일을 엽니다.
 with open(output_file, "w", encoding="utf-8") as f:
@@ -93,11 +86,7 @@ elapsed_time = end_time - start_time  # 실행 시간 계산
 print(f"bert종료 time: {elapsed_time:.4f} seconds")  # 실행 시간 출력
 
 import openai
-<<<<<<< HEAD
 openai.api_key = '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'
-=======
-openai.api_key = API_KEY
->>>>>>> adbf1ad6e2c6ea3ce39ecde989270e120e369a8d
 
 quest = f"User: {title}라는 제목을 가진 영상의 요약 내용인\n[{full}]\n를 읽고 이 영상에 대한 내용을 보고서 형식으로 한글로 써줘"
 messages = [{"role":"user", "content": quest}]
@@ -109,12 +98,6 @@ completion = openai.ChatCompletion.create(
 
 
 chat_response = completion.choices[0].message["content"].strip()
-<<<<<<< HEAD
-=======
-
-#결과를 줄바꿈해준다
-chat_response = re.sub(r'(?<=[.!?])\s+', '\n', chat_response)
->>>>>>> adbf1ad6e2c6ea3ce39ecde989270e120e369a8d
 print(f'ChatGPT: {chat_response}')
 
 result_file = os.path.join("output", "result.txt")
@@ -125,10 +108,7 @@ end_time = time.time()  # 종료 시간 저장
 elapsed_time = end_time - start_time  # 실행 시간 계산
 print(f"gpt종료 time: {elapsed_time:.4f} seconds")  # 실행 시간 출력
 
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> adbf1ad6e2c6ea3ce39ecde989270e120e369a8d
