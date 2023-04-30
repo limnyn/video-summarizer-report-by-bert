@@ -85,8 +85,9 @@ end_time = time.time()  # 종료 시간 저장
 elapsed_time = end_time - start_time  # 실행 시간 계산
 print(f"bert종료 time: {elapsed_time:.4f} seconds")  # 실행 시간 출력
 
+import apikey
 import openai
-openai.api_key = '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'
+openai.api_key = apikey.GPT_KEY
 
 quest = f"User: {title}라는 제목을 가진 영상의 요약 내용인\n[{full}]\n를 읽고 이 영상에 대한 내용을 보고서 형식으로 한글로 써줘"
 messages = [{"role":"user", "content": quest}]
