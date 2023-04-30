@@ -15,11 +15,11 @@
 
 
 
-import time, os, re, shutil
+import time, os, re, youtubeCCextract
 start_time = time.time()  # 시작 시간 저장
 
-# 자막파일만 data폴더에 넣으면 제목을 추출하고 해당 자막 파일 이름을 cc_input.txt로 변환
-
+# url을 받아서 영어 자막 다운로드
+youtubeCCextract.caption_extract()
 # 현재 경로의 input 폴더를 지정합니다.
 input_dir = "input"
 
@@ -34,24 +34,33 @@ if not txt_files:
     print("No txt files found in input folder.")
     exit()
 
-# 첫 번째 txt 파일의 제목을 추출합니다.
-txt_file = txt_files[0]
-title = os.path.splitext(txt_file)[0]
-title = re.sub(r"\[[^\]]*\]", "", title)
-title = f'"{title}"'
-print("title =", title)
+# # 첫 번째 txt 파일의 제목을 추출합니다.
+# txt_file = txt_files[0]
+# title = os.path.splitext(txt_file)[0]
+# title = re.sub(r"\[[^\]]*\]", "", title)
+# title = f'"{title}"'
+# print("title =", title)
 
-# txt 파일을 복사하고 제목을 cc_input.txt로 지정해 input 폴더에 저장합니다.
-shutil.copy(os.path.join(input_dir, txt_file), os.path.join(input_dir, "cc_input.txt"))
-os.rename(os.path.join(input_dir, "cc_input.txt"), os.path.join(input_dir, f"cc_input.txt"))
+# # txt 파일을 복사하고 제목을 cc_input.txt로 지정해 input 폴더에 저장합니다.
+# shutil.copy(os.path.join(input_dir, txt_file), os.path.join(input_dir, "cc_input.txt"))
+# os.rename(os.path.join(input_dir, "cc_input.txt"), os.path.join(input_dir, f"cc_input.txt"))
 
 # 입력 파일 이름과 출력 파일 이름을 지정합니다.
-input_file = "input/cc_input.txt"
+# input_file = "input/cc_input.txt"
 output_file = "output/cc_output.txt"
 
-# 입력 파일을 엽니다.
-with open(input_file, "r", encoding="utf-8") as f:
-    text = f.read()
+# # 입력 파일을 엽니다.
+# with open(input_file, "r", encoding="utf-8") as f:
+#     text = f.read()
+import os
+
+if not os.path.exists('input'):
+    os.makedirs('input')
+
+with open('input/input.txt', 'r') as f:
+    title = f.readline().strip()
+    text = f.read().strip()
+
 # 불필요한 줄바꿈을 제거합니다.
 text = re.sub(r"\n+", " ", text)
 # 문장 단위로 줄바꿈을 정리합니다.
