@@ -40,3 +40,4 @@ def caption_extract():
     with open('input/input.txt', 'w') as f:
         f.write(f"{title}\n")
         f.write('\n'.join(text_list))
+    
