@@ -19,10 +19,10 @@ import time, os
 import cc_to_text, youtubeCCextract
 from summarizer import Summarizer
 
-start_time = time.time()  # 시작 시간 저장
 
 # 1- url을 받아서 영어 자막 다운로드, 제목추출
 youtubeCCextract.caption_extract()
+start_time = time.time()  # 시작 시간 저장
 
 # 2- 영어 자막 파일 txt파일로 전처리
 title, body = cc_to_text.cc_to_txt()
@@ -34,7 +34,7 @@ full = ''.join(result)
 
 output_dir = "output"
 os.makedirs(output_dir, exist_ok=True)  # output 폴더가 없으면 생성합니다.
-with open(os.path.join(output_dir, "bert_output.txt"), "w") as f:
+with open(os.path.join(output_dir, "bert_output.txt"), "w", encoding='utf-8') as f:
     f.write(full)
 end_time = time.time()  
 elapsed_time = end_time - start_time  # 
@@ -67,6 +67,5 @@ with open(result_file, "w", encoding="utf-8") as f:
 end_time = time.time() 
 elapsed_time = end_time - start_time  
 print(f"gpt종료 time: {elapsed_time:.4f} seconds")  # 실행 시간 출력
-
 
 

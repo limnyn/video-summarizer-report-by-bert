@@ -4,6 +4,8 @@
 import re, os, requests
 from bs4 import BeautifulSoup
 from youtube_transcript_api import YouTubeTranscriptApi
+import emoji
+
 
 
 
@@ -14,9 +16,8 @@ def caption_extract():
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
     title = soup.find("meta", property="og:title")["content"]
-    # print(title)
+    title = re.sub(r'[^\w\s]', '', title)
 
-    # video_id = '6_cFlt368XM'
     video_id = re.search(r'(?<=v=)[\w-]+', url).group(0)
 
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
@@ -37,7 +38,7 @@ def caption_extract():
     if not os.path.exists('input'):
         os.makedirs('input')
 
-    with open('input/input.txt', 'w') as f:
+    with open('input/input.txt', 'w', encoding='utf-8') as f:
         f.write(f"{title}\n")
         f.write('\n'.join(text_list))
     

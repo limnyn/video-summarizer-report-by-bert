@@ -22,7 +22,7 @@ def cc_to_txt():
     if not os.path.exists('input'):
         os.makedirs('input')
 
-    with open('input/input.txt', 'r') as f:
+    with open('input/input.txt', 'r', encoding='utf-8') as f:
         title = f.readline().strip()
         text = f.read().strip()
 
